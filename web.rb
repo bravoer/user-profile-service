@@ -4,8 +4,8 @@
 
 MU_SESSION = RDF::Vocabulary.new(MU.to_uri.to_s + 'session/')
 MU_AUTH = RDF::Vocabulary.new(MU.to_uri.to_s + 'authorization/')
-MUSIC = RDF::Vocabulary.new('http://mu.semte.ch/vocabularies/music/')
-BRAV = RDF::Vocabulary.new('http://mu.semte.ch/vocabularies/bravoer/')
+MUSIC = RDF::Vocabulary.new(MU_EXT.to_uri.to_s + 'music/')
+BRAV = RDF::Vocabulary.new(MU_EXT.to_uri.to_s + 'bravoer/')
 
 ###
 # GET /userprofile

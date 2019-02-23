@@ -48,7 +48,7 @@ end
 helpers do
 
   def select_user_profile_by_session(session)
-    query = " SELECT ?userName ?instrument ?groupName FROM <#{settings.graph}> WHERE {"
+    query = " SELECT ?userName ?instrument ?groupName ?musicianUuid FROM <#{graph}> WHERE {"
     query += "  <#{session}> <#{MU_SESSION.account}>/^<#{RDF::Vocab::FOAF.account}> ?user ."
     query += "  ?user <#{RDF::Vocab::FOAF.name}> ?userName ."
     query += "  "

@@ -59,7 +59,7 @@ helpers do
     query += "  "
     query += "  OPTIONAL {"
     query += "    ?musician <#{BRAV.hasUser}> ?user ;"
-    query += "              <#{MU.uuid}> ?musicianUuid ;"
+    query += "              <#{MU_CORE.uuid}> ?musicianUuid ;"
     query += "              <#{MUSIC.instrument}> ?instrument ."
     query += "  }"
     query += "}"

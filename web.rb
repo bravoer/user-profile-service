@@ -27,7 +27,7 @@ get '/userprofile/?' do
   ###
   result = select_user_profile_by_session(session_uri)
   error("No user found for session #{session_uri}") if result.empty?
-  
+
   ###
   # Assemble profile
   ###
@@ -35,9 +35,10 @@ get '/userprofile/?' do
   result.each do |solution|
     profile[:name] = solution[:userName]
     profile[:instrument] = solution[:instrument] if solution[:instrument]
+    profile[:musician] = solution[:musicianUuid] if solution[:musicianUuid]
     profile[:authGroups] << solution[:groupName] if solution[:groupName]
   end
-  
+
   status 200
   profile.to_json
 end
@@ -45,7 +46,7 @@ end
 
 
 helpers do
-  
+
   def select_user_profile_by_session(session)
     query = " SELECT ?userName ?instrument ?groupName FROM <#{settings.graph}> WHERE {"
     query += "  <#{session}> <#{MU_SESSION.account}>/^<#{RDF::Vocab::FOAF.account}> ?user ."
@@ -58,10 +59,11 @@ helpers do
     query += "  "
     query += "  OPTIONAL {"
     query += "    ?musician <#{BRAV.hasUser}> ?user ;"
+    query += "              <#{MU.uuid}> ?musicianUuid ;"
     query += "              <#{MUSIC.instrument}> ?instrument ."
     query += "  }"
     query += "}"
     query(query)
   end
-  
+
 end
